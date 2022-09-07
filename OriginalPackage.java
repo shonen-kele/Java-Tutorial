@@ -872,11 +872,11 @@ class ClassOfClasses{
     static class Files{
         static class importantFiles{
             static void main(){
+                File oneVitalFile = new File
+                ("C:\\Coding\\Java\\Java Tutorial\\examplePackageFolder\\money.txt");
+                /*The createNewFile method for the File object is true if-
+                the file does not already exist. */
                 try{
-                    File oneVitalFile =
-                    new File("C:\\Coding\\Java\\Java Tutorial\\money.txt");
-                    /*The createNewFile method for the File object is true if-
-                    the file does not already exist. */
                     if(oneVitalFile.createNewFile()){
                         System.out.println("File created: " + 
                         oneVitalFile.getName());
@@ -887,21 +887,52 @@ class ClassOfClasses{
                     System.out.println("An error occured");
                     e.printStackTrace();
                 }
+                /*createNewFile(); might throw an exception and that exception-
+                will be a checked exception which will be checked at complie-
+                time. All compile time exceptions are checked exceptions and-
+                all runtime exceptions are unchecked exceptions.*/
+                //Writing to a file
                 try{
-                    FileWriter userToFiler =
-                    new FileWriter("C:\\Coding\\Java\\Java Tutorial\\money.txt");
+                    FileWriter userToFile = new FileWriter
+                    ("C:\\Coding\\Java\\Java Tutorial\\examplePackageFolder\\money.txt");
                     String input = OriginalPackage.mainMethodInput.nextLine();
-                    userToFiler.write(input);
-                    userToFiler.close();
+                    userToFile.write(input);
+                    userToFile.close();
                     System.out.println("You wrote into the file");
                 } catch (IOException e){
                     System.out.println("An error occured");
                     e.printStackTrace();
                 }
-                /*createNewFile(); might throw an exception and that exception-
-                will be a checked exception which will be checked at complie-
-                time. All compile time exceptions are checked exceptions and-
-                all runtime exceptions are unchecked exceptions.*/
+                //Reading a file
+                /*We use the scanner class to read the contents of the text-
+                file*/
+                try{
+                    Scanner fileReader = new Scanner(oneVitalFile);
+                    while(fileReader.hasNextLine()){
+                        String contents = fileReader.nextLine();
+                        System.out.println(contents);
+                    }
+                    fileReader.close();
+                    System.out.println("File information");
+                    System.out.println("Does the file exist? "+oneVitalFile.exists());
+                    System.out.println("File Name: "+oneVitalFile.getName());
+                    System.out.println("Absolute Path: "+oneVitalFile.getAbsolutePath());
+                    System.out.println("Writeable: "+oneVitalFile.canWrite());
+                    System.out.println("Readable: "+oneVitalFile.canRead());
+                    System.out.println("File size in bytes: "+oneVitalFile.length());
+                } catch(IOException e){
+                    System.out.println("There was an error");
+                    e.printStackTrace();
+                }
+                File disposabFile = new File
+                ("C:\\Coding\\Java\\Java Tutorial\\examplePackageFolder\\disposableFile.txt");
+                if(disposabFile.delete()){
+                    System.out.println("Deleted file: "+disposabFile.getName());
+                    //You can also delete folders
+                } else{
+                    System.out.println("Failed to delete this file");
+                }
+                
             }
         }
     }
